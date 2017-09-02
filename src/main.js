@@ -5,6 +5,8 @@ const minimist = require('minimist');
 const log = require('./services/log');
 const help = require('./services/help');
 
+const server = require('./server');
+
 log.setLogLevel('debug');
 
 const args = minimist(process.argv, {
