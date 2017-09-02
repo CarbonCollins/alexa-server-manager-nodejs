@@ -3,6 +3,7 @@
 const minimist = require('minimist');
 
 const log = require('./services/log');
+const help = require('./services/help');
 
 log.setLogLevel('debug');
 
@@ -22,13 +23,7 @@ const args = minimist(process.argv, {
 });
 
 if (args.help) {
-  log.raw(`alexa-server - alexa app manager
-
-  usage: alexa-server -h
-  usage: alexa-server [command] -h 
-
-  options:
-    short\tfull\t\tdescription
-    -h,\t\t--help\t\tprint help documentation
-  `);
+  help(args);
+} else {
+  // tada
 }
