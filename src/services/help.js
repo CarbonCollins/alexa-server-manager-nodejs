@@ -9,22 +9,24 @@ const log = require('./log');
  * @returns {boolean}
  */
 function isCommand(args) {
-  return !args.start && !args.stop;
+  return args.start || args.stop;
 }
 
 module.exports = (args) => {
   if (args.help && !isCommand(args)) {
     log.raw(`alexa-server - alexa app manager
-    
-      usage: alexa-server -h | -s | -c
-      usage: alexa-server --help | --start | --stop
-      usage: alexa-server [command] -h 
+
+      usage: alexa-server [-h --help]
+      usage: alexa-server [command] [-h --help] 
+      usage: alexa-server start [-p --port] [-u --host]
+      usage: alexa-server stop
     
       options:
         short\tfull\t\tdescription
         -h,\t\t--help\t\tprint help documentation
-        -s,\t\t--start\t\tstarts the alexa app manager
-        -c,\t\t--stop\t\tstops the alexa app manager
+
+        -p,\t\t--port\t\tspecifys a port for the alexa server to listen to (defaults to 8080)
+        -u,\t\t--host\t\tspecifies a host for the alexa server to listen to (defaults to 0.0.0.0)
     `);
   } else {
     log.raw('command help not written yet');

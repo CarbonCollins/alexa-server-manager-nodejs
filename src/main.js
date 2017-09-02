@@ -8,17 +8,21 @@ const help = require('./services/help');
 log.setLogLevel('debug');
 
 const args = minimist(process.argv, {
-  string: [],
+  string: [ 'port', 'host' ],
   boolean: [ 'development', 'help', 'daemon' ],
   alias: {
     help: 'h',
     daemon: 'd',
-    development: 'dev'
+    development: 'dev',
+    port: 'p',
+    host: 'u'
   },
   default: {
     development: false,
     help: false,
-    daemon: false
+    daemon: false,
+    port: '8080',
+    host: '0.0.0.0'
   }
 });
 
