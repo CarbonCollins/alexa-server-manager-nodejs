@@ -1,0 +1,21 @@
+{
+  "name": "alexa-server-manager-nodejs",
+  "version": "1.0.0",
+  "description": "A package for managing various Alexa skills on a server",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "Steven Collins",
+    "github": "CarbonCollins"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "alexa-app-server": "^3.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.6.0"
+  }
+}
