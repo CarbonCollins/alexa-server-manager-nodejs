@@ -4,7 +4,7 @@
   "description": "A package for managing various Alexa skills on a server",
   "main": "src/main.js",
   "scripts": {
-    "start": "node src/main.js",
+    "start": "node src/main.js --test",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": {
@@ -13,7 +13,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "alexa-app-server": "^3.0.1"
+    "alexa-app-server": "^3.0.1",
+    "chalk": "^2.1.0",
+    "minimist": "^1.2.0",
+    "moment": "^2.18.1"
   },
   "devDependencies": {
     "eslint": "^4.6.0"

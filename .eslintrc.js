@@ -19,7 +19,8 @@ module.exports = exports = {
   "globals": {
     "Promise": true,
     "module": true,
-    "require": true
+    "require": true,
+    "process": true
   },
 
   "rules": {
