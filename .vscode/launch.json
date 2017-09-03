@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "Launch Program",
       "program": "${workspaceRoot}/src/main.js",
-      "args": ["--color", "--development", "--help"]
+      "args": ["--color", "--development", "start"]
     }
   ]
 }

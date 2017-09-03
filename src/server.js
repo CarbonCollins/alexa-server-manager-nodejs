@@ -1,3 +1,4 @@
+/* globals __dirname */
 'use strict';
 
 const path = require('path');
@@ -13,7 +14,7 @@ class AlexaServer {
    * @constructor
    */
   constructor() {
-    this.serverDir = path.dirname();
+    this.serverDir = __dirname;
     this.appDir = path.join(this.serverDir, '../apps');
     this.publicDir = path.join(this.serverDir, './public');
     this.server = new AlexaAppServer({
@@ -39,6 +40,14 @@ class AlexaServer {
    */
   stop() {
     this.server.stop();
+  }
+
+  /**
+   * @method AlexaServer~reloadApps
+   * @desc reloads the apps in the app directory
+   */
+  reloadApps() {
+    // do some reloading stuff
   }
 
 }
