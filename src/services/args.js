@@ -76,6 +76,13 @@ class ArgumentsService {
     return this.parsedArgs._.includes('start') || false;
   }
 
+  /**
+   * @member {boolean} stop
+   * @readonly
+   */
+  get stop() {
+    return this.parsedArgs._.includes('stop') || false;
+  }
 }
 
 module.exports = new ArgumentsService();

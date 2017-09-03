@@ -17,18 +17,19 @@ args.parseArguments(process.argv);
 
 fs.ensureDir(path.join(__dirname, '../server/apps'));
 
+const server = new AlexaAppServer({
+  server_root: path.join(__dirname, '../'),
+  public_html: './src/public',
+  app_dir: './server/apps',
+  app_root: 'alexa',
+  port: args.port,
+  httpEnabled: true,
+});
+
 if (args.help) {
   help(args);
 } else if (args.start) {
   log.info('start app');
-  const server = new AlexaAppServer({
-    server_root: path.join(__dirname, '../'),
-    public_html: './src/public',
-    app_dir: './server/apps',
-    app_root: 'alexa',
-    port: args.port,
-    httpEnabled: true,
-  });
   server.start();
   const io = socketIO(server.instance);
   dashboardController.registerRoutes(server.express, io);
@@ -36,6 +37,9 @@ if (args.help) {
   io.on('connection', () => {
     log.info('client connected');
   });
+} else if (args.stop) {
+  log.info('stop app');
+  server.stop();
 } else {
   log.info('unknown command');
 }
