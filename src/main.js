@@ -1,7 +1,9 @@
+/* globals __dirname */
 'use strict';
 
-const http = require('http');
-const express = require('express');
+const path = require('path');
+const fs = require('fs-extra');
+const AlexaAppServer = require('alexa-app-server');
 const socketIO = require('socket.io');
 
 const args = require('./services/args');
@@ -10,27 +12,29 @@ const help = require('./services/help');
 
 const dashboardController = require('./controllers/dashboard');
 
-const server = require('./server');
-
 log.setLogLevel('debug');
 args.parseArguments(process.argv);
+
+fs.ensureDir(path.join(__dirname, '../server/apps'));
 
 if (args.help) {
   help(args);
 } else if (args.start) {
   log.info('start app');
-  const app = express();
-  const httpServer = http.createServer(app);
-  const io = socketIO(httpServer);
-
-  dashboardController.registerRoutes(app, io);
+  const server = new AlexaAppServer({
+    server_root: path.join(__dirname, '../'),
+    public_html: './src/public',
+    app_dir: './server/apps',
+    app_root: 'alexa',
+    port: args.port,
+    httpEnabled: true,
+  });
+  server.start();
+  const io = socketIO(server.instance);
+  dashboardController.registerRoutes(server.express, io);
 
   io.on('connection', () => {
     log.info('client connected');
-  });
-
-  httpServer.listen(args.port, args.host, () => {
-    log.info(`Web server started on: ${args.host}:${args.port}`);
   });
 } else {
   log.info('unknown command');
